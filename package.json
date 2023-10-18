@@ -10,12 +10,17 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "vscode-aquarium.helloWorld",
-      "title": "Hello World"
-    }]
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "vscodeAquarium.view",
+          "name": "VS CODE AQUARIUM"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
