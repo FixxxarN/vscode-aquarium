@@ -1,8 +1,14 @@
 {
+  "icon": "./src/sprites/logo.png",
   "name": "vscode-aquarium",
   "displayName": "vscode-aquarium",
+  "publisher": "AndreTopalovicTornstrom",
   "description": "Fish for everyone",
-  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FixxxarN/vscode-aquarium"
+  },
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.83.0"
   },
