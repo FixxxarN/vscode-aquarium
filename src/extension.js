@@ -31,8 +31,10 @@ class AquariumProvider {
 	}
 
 	_getHtmlForWebview(webview) {
-		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'main.js'))
-		const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'style.css'))
+		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'main.js'));
+		const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'style.css'));
+		const perchUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'sprites', 'perch.png'));
+		const perchFlippedUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'sprites', 'perchFlipped.png'));
 
 		const nonce = utils.getNonce();
 
@@ -44,8 +46,9 @@ class AquariumProvider {
 				<link rel="stylesheet" href="${styleUri}" />
 			</head>
 			<body>
-				<canvas id="canvas"></canvas>
-				<script nonce="${nonce}" src="${scriptUri}"></script>
+				<canvas id="fishCanvas"></canvas>
+				<canvas id="backgroundCanvas"></canvas>
+				<script nonce="${nonce}" src="${scriptUri}" perchUri="${perchUri}" perchFlippedUri="${perchFlippedUri}"></script>
 			</body>
 		</html>`
 	}
