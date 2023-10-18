@@ -2,28 +2,43 @@
 const perchUri = document.currentScript.getAttribute('perchUri');
 const perchFlippedUri = document.currentScript.getAttribute('perchFlippedUri');
 
-const backgroundCanvas = document.getElementById('backgroundCanvas');
-const backgroundContext = backgroundCanvas.getContext('2d');
+handleBackground();
 
-renderBackground();
+function handleBackground() {
+  const backgroundCanvas = document.getElementById('backgroundCanvas');
+  const backgroundContext = backgroundCanvas.getContext('2d');
 
-function renderBackground() {
-  backgroundContext.fillStyle = 'lightblue';
-  backgroundContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+  renderBackground();
+
+  function renderBackground() {
+    backgroundContext.fillStyle = 'lightblue';
+    backgroundContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+  }
 }
+
 
 const fishCanvas = document.getElementById('fishCanvas');
 const fishContext = fishCanvas.getContext('2d');
 
-fishContext.canvas.style.imageRendering = 'auto';
-window.devicePixelRatio = 2;
+function resizeCanvas() {
+  fishContext.canvas.width = window.innerWidth;
+  fishContext.canvas.height = window.innerHeight;
 
-var scale = window.devicePixelRatio;
+  scaleCanvas();
+}
 
-fishCanvas.width = Math.floor(window.innerWidth * scale);
-fishCanvas.height = Math.floor(window.innerHeight * scale);
+function scaleCanvas() {
+  var scale = window.devicePixelRatio;
 
-fishContext.scale(scale, scale);
+  fishCanvas.width = Math.floor(window.innerWidth * scale);
+  fishCanvas.height = Math.floor(window.innerHeight * scale);
+
+  fishContext.scale(scale, scale);
+}
+
+scaleCanvas();
+
+window.addEventListener('resize', resizeCanvas);
 
 renderPerch();
 
@@ -43,6 +58,7 @@ function renderPerch() {
   function animate() {
     fishContext.clearRect(0, 0, fishCanvas.width, fishCanvas.height);
     fishContext.imageSmoothingEnabled = false;
+
     if (x <= 0) {
       touchedLeftSide = true;
       touchedRightSide = false;
@@ -51,12 +67,13 @@ function renderPerch() {
       touchedRightSide = true;
       touchedLeftSide = false;
     }
+
     if (touchedLeftSide) {
-      fishContext.drawImage(perchFlippedImage, x, fishCanvas.height / 4);
+      fishContext.drawImage(perchFlippedImage, x, 50);
       x += 1;
     }
     if (touchedRightSide) {
-      fishContext.drawImage(perchImage, x, fishCanvas.height / 4);
+      fishContext.drawImage(perchImage, x, 50);
       x -= 1;
     }
     requestAnimationFrame(animate)
