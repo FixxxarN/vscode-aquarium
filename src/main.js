@@ -63,7 +63,7 @@ function renderPerch() {
       touchedLeftSide = true;
       touchedRightSide = false;
     }
-    if (x >= fishCanvas.width / 2 - 32) {
+    if (x >= window.innerWidth - 32) {
       touchedRightSide = true;
       touchedLeftSide = false;
     }
